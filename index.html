@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  nav {
+    top: 0;
+    position: sticky;
+    background: grey;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .link {
+    height: 100px;
+    width: 200px;
+  }
+
+  .red {
+    background: red;
+  }
+  .blue {
+    background: blue;
+  }
+  .green {
+    background: green;
+  }
+
+  main {
+    margin-top: 15rem;
+    background: grey;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .section {
+    height: 900px;
+    width: 100%;
+  }
+
+</style>
+<body>
+  <nav class="nav">
+    <div class="link red" id="red"></div>
+    <div class="link blue" id="blue"></div>
+    <div class="link green" id="green"></div>
+  </nav>
+  
+  <main>
+    <div class="section red"></div>
+    <div class="section blue"></div>
+    <div class="section green"></div>
+  </main>
+  <script>
+    const links = document.querySelectorAll('.link')
+    let lastTopPosition = window.scrollY
+    links.forEach((link) => {
+      link.addEventListener('click', () => moveToDiv(link))
+    })
+
+    function moveToDiv(link) {
+      let arrivalElement
+      switch(link.id){
+        case "red":
+          arrivalElement = document.querySelector('.section.red')
+          break;
+        case "blue":
+          arrivalElement = document.querySelector('.section.blue')
+          break;
+        case "green":
+          arrivalElement = document.querySelector('.section.green')
+          break;  
+      }
+     
+      let distanceFromTop = arrivalElement.getBoundingClientRect().top
+      console.log(arrivalElement.getBoundingClientRect())
+      window.scrollTo({
+        top: distanceFromTop - 150 + window.scrollY,
+        behavior: "smooth"
+      })
+
+    }
+  </script>
+</body>
+</html>
